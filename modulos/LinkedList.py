@@ -26,8 +26,12 @@ class LinkedList:
             current = self.head
 
             if index == 0:
-                current.next.prev = None
-                self.head = current.next
+                if current.next != None:
+                    current.next.prev = None
+                    self.head = current.next
+                else:
+                    self.head = None
+                
                 self.size -= 1
                 return current.value
 
