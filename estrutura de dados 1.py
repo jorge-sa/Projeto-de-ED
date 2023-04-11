@@ -42,7 +42,7 @@ while True:
             r = Registro(nome,telefone,email)
             n = Node(r)
 
-            lista.add(n)
+            lista.insert(n)
 
             print("\nContato adicionado\n")
             sleep(1)

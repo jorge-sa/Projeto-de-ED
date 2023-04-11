@@ -1,6 +1,6 @@
 class Node:
-    def __init__(self, value):
-        self.value = value
+    def __init__(self, data):
+        self.data = data
         self.prev = None
         self.next = None
 
@@ -20,6 +20,37 @@ class LinkedList:
         self.head.prev = node
         self.head = node
         self.size += 1
+
+    def insert(self, node:Node):
+        current = self.head
+        if self.head == None:
+            self.head = node
+            self.size += 1
+
+            return
+
+        if (node.data.name.lower() <= current.data.name.lower()):
+            node.next = current
+            current.prev = node
+            self.head = node
+            self.size += 1
+            return
+
+        previous = None
+
+        while (current != None) and (node.data.name.lower() >= current.data.name.lower()):
+            print("Here")
+            previous = current
+            current = current.next
+
+        if current == None:
+            previous.next = node
+            node.prev = previous
+            return
+
+        node.next = previous.next
+        node.prev = current
+        previous.next = current.prev = node
 
     def remover(self, index):
         if index < self.size:
@@ -53,7 +84,7 @@ class LinkedList:
             current = self.head
             for i in range(self.size):
                 if i == index:
-                    return current.value
+                    return current.data
                 
                 current = current.next
         
@@ -62,7 +93,7 @@ class LinkedList:
     def find(self, value):
         current = self.head
         for i in range(self.size):
-            if current.value.name == value:
+            if current.data.name == value:
                 return i
                 
             current = current.next
@@ -73,7 +104,7 @@ class LinkedList:
         current = self.head
         while current != None:
             print("".join("="*50))
-            current.value.show()
+            current.data.show()
             #if current.next == None:
             #    print(current.prev.value, ">", current.value)
             #elif current.prev == None:
